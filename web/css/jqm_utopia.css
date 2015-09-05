@@ -1,0 +1,180 @@
+header {
+       /* background: white url(/jqm/i/fn_agent_logo_bg.png) no-repeat left center; */
+	   background: white;
+       padding: 0.5em;
+       margin:0;
+	   min-height: 80px;
+
+}
+
+header p { margin-right: 190px; }
+
+
+/* form message styles */
+.portrait label.error, .landscape label.error {
+    color: red;
+    font-size: 14px !important;
+    font-weight: normal;
+    line-height: 1.4;
+    margin-top: 0.5em;
+    width: 100%;
+    float: none;
+    background-color:yellow;
+}
+ 
+.landscape label.error { 
+    display: inline-block; 
+    margin-left: 22%; 
+}
+ 
+.portrait label.error { 
+    margin-left: 0; 
+    display: block; 
+}
+ 
+em, .reqField { 
+    color: red; 
+    font-weight: bold; 
+    padding-right: .25em; 
+}
+
+.floatySelect {
+ font-size:10px !important; 
+/* width:125px; */ 
+float:right;	
+}
+
+#privacy { padding:1em; }
+
+
+/* Form items */
+/* inputs */
+
+.ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li {
+	padding: .7em 15px .7em 15px;
+	display: block;
+}
+
+.min-width-480px .ui-controlgroup-controls {
+	width: 70%;
+	display: inline-block;
+}
+
+.min-width-480px .ui-select {
+	width: 70%;
+	display: inline-block;
+}
+
+
+.min-width-480px .ui-controlgroup-label {
+	vertical-align: top;
+	display: inline-block;
+	width: 25%;
+	margin: 0 2% 0 0;
+}
+
+.min-width-480px label.ui-select {
+	display: inline-block;
+	width: 25%;
+	margin: 0 2% 0 0;
+}
+
+.min-width-480px label.ui-input-text {
+	display: inline-block;
+	width: 25%;
+	margin: 0 2% 0 0;
+}
+
+.min-width-480px input.ui-input-text, .min-width-480px textarea.ui-input-text, .min-width-480px .ui-input-search {
+	width: 40%;
+	display: inline-block;
+	margin-right: 25%;
+}
+
+.ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label {
+	font-size: 12px !important;
+	font-weight: normal !important;
+}
+
+/* legend */
+.ui-controlgroup-label, label.ui-select, label.ui-input-text {
+	font-size: 12px !important;
+	font-weight: bold !important;	
+}
+
+.ui-legend-custom, .ui-legend-custom-wide { border:1px solid #ccc !important; }
+
+.ui-legend-custom-wide {width:500px !important;}
+
+/* h3 styling */
+h3 { margin-bottom:1.5em !important; margin-right:1.5em !important}
+
+/* h2 styling inside forms */
+.ui-li-heading {
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+	margin: .6em 0;
+	text-overflow: clip;
+	overflow: hidden;
+	white-space: nowrap;
+	white-space: normal;
+	text-align:left;
+}
+
+/* input text */
+input.ui-input-text, textarea.ui-input-text
+ {
+ 	font-size: 12px !important;
+	
+ }
+
+.ui-btn-up-c, .ui-btn-hover-c {
+	font-size: 13px !important;
+}
+
+
+.ui-li-desc {
+	font-size: 12px;
+	font-weight: normal;
+	display: block;
+	margin: -.5em 0 .6em;
+	text-overflow: clip;
+	overflow: hidden;
+	white-space: nowrap;
+	white-space: normal;
+}
+
+p.formText  { margin-left: 1.5em; margin-right: 2.5em;}
+
+.ui-btn-inner {
+	padding: .6em 25px;
+	display: block;
+	height: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	white-space: normal;
+	position: relative;
+}
+
+
+.ui-header .ui-title, .ui-footer .ui-title {
+text-align: center;
+font-size: 16px;
+display: block;
+margin: .6em 90px .8em;
+padding: 0;
+text-overflow: ellipsis;
+overflow: hidden;
+white-space: nowrap;
+white-space: normal;
+outline: 0!important;
+}
+
+
+.ui-loader { width: 25% }
+
+
+/* home page icons in list */
+.ui-li-thumb, .ui-li-icon { position:inherit;}

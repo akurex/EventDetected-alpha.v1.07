@@ -1,0 +1,143 @@
+/* U -  FN utopia styles -  data-theme="u"
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-bar-u {
+	border: 1px solid 		#456f9a;
+	background: 			#5e87b0;
+	/* FN blue */
+	background: 			#00467F;
+	color: 					#fff;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px #254f7a;
+	background-image: -moz-linear-gradient(top, 
+							#81a8ce, 
+							#5e87b0);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#81a8ce),
+		color-stop(1, 		#5e87b0));
+		
+	/* Gradient for FN blue */	
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#456F9A),
+		color-stop(1, 		#00467F));		
+		
+		
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#81a8ce', EndColorStr='#5e87b0')";
+}
+.ui-bar-u,
+.ui-bar-u input,
+.ui-bar-u select,
+.ui-bar-u textarea,
+.ui-bar-u button {
+	font-family: Helvetica, Arial, sans-serif;
+}
+.ui-bar-u .ui-link-inherit {
+	color: 					#fff;
+}
+.ui-bar-u .ui-link {
+	color: 					#7cc4e7;
+	font-weight: bold;
+}
+
+.ui-body-u {
+	border: 1px solid 		#C6C6C6;
+	background: 			#cccccc;
+	color: 					#333333;
+	text-shadow: 0 1px 0 	#fff;
+	font-weight: normal;
+	background-image: -moz-linear-gradient(top, 
+							#e6e6e6, 
+							#cccccc);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#e6e6e6),
+		color-stop(1, 		#cccccc));
+	 -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#e6e6e6', EndColorStr='#cccccc')";
+}
+.ui-body-u,
+.ui-body-u input,
+.ui-body-u select,
+.ui-body-u textarea,
+.ui-body-u button {
+	font-family: Helvetica, Arial, sans-serif;
+}
+.ui-body-u .ui-link-inherit {
+	color: 					#333333;
+}
+.ui-body-u .ui-link {
+	color: 					#2489CE;
+	font-weight: bold;
+}
+.ui-btn-up-u {
+	border: 1px solid 		#145072;
+	background: 			#2567ab;
+	/* FN blue */
+	background: 			#00467F;	
+	font-weight: bold;
+	color: 					#fff;
+	cursor: pointer;
+	text-shadow: 0 -1px 1px #145072;
+	text-decoration: none;
+	background-image: -moz-linear-gradient(top, 
+							#4e89c5, 
+							#2567ab);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+			color-stop(0, 	#5f9cc5),
+			color-stop(1, 	#396b9e));
+			
+	/* Gradient for FN blue */	
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#456F9A),
+		color-stop(1, 		#00467F));			
+			
+			
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#4e89c5', EndColorStr='#2567ab')";
+}
+.ui-btn-up-u a.ui-link-inherit {
+	color: 					#fff;
+}
+.ui-btn-hover-u {
+	border: 1px solid 		#00516e;
+	background: 			#4b88b6;
+	background: 			#2567ab;	
+	font-weight: bold;
+	color: 					#fff;
+	text-shadow: 0 -1px 1px #014D68;
+	background-image: -moz-linear-gradient(top, 
+							#72b0d4, 
+							#4b88b6);
+	text-decoration: none;
+	background-image: -webkit-gradient(linear,left top,left bottom,
+			color-stop(0, 	#72b0d4),
+			color-stop(1, 	#4b88b6));
+			
+	background-image: -webkit-gradient(linear,left top,left bottom,
+			color-stop(0, 	#5f9cc5),
+			color-stop(1, 	#396b9e));			
+			
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#72b0d4', EndColorStr='#4b88b6')";
+}
+.ui-btn-hover-u a.ui-link-inherit {
+	color: 					#fff;
+}
+.ui-btn-down-u {
+	border: 1px solid 		#225377;
+	background: 			#4e89c5;
+	font-weight: bold;
+	color: 					#fff;
+	text-shadow: 0 -1px 1px #225377;
+	background-image: -moz-linear-gradient(top, 
+							#396b9e, 
+							#4e89c5);
+	background-image: -webkit-gradient(linear,left top,left bottom,
+		color-stop(0, 		#396b9e),
+		color-stop(1, 		#4e89c5));
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#396b9e', EndColorStr='#4e89c5')";
+}
+.ui-btn-down-u a.ui-link-inherit {
+	color: 					#fff;
+}
+.ui-btn-up-u,
+.ui-btn-hover-u,
+.ui-btn-down-u {
+	font-family: Helvetica, Arial, sans-serif;
+}

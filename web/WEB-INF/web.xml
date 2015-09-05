@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <description>SAdmin</description>
+        <servlet-name>SAdmin</servlet-name>
+        <servlet-class>com.sw2.ed.servlet.SAdmin</servlet-class>
+    </servlet>
+    <servlet>
+        <description>SEventos</description>
+        <servlet-name>SEventos</servlet-name>
+        <servlet-class>com.sw2.ed.servlet.SEventos</servlet-class>
+    </servlet>
+    <servlet>
+        <description>SLogin</description>
+        <servlet-name>SLogin</servlet-name>
+        <servlet-class>com.sw2.ed.servlet.SLogin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SAdmin</servlet-name>
+        <url-pattern>/SAdmin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SEventos</servlet-name>
+        <url-pattern>/SEventos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SLogin</servlet-name>
+        <url-pattern>/SLogin</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <listener>
+        <listener-class>com.sw2.ed.servlet.ThreadN</listener-class>
+    </listener>
+</web-app>

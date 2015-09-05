@@ -1,0 +1,501 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
+
+
+
+DROP SCHEMA IF EXISTS `mydbmina` ;
+
+CREATE SCHEMA IF NOT EXISTS `mydbmina` DEFAULT CHARACTER SET latin1 ;
+
+USE `mydbmina` ;
+
+
+
+-- -----------------------------------------------------
+
+-- Table `mydbmina`.`lugar`
+
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `mydbmina`.`lugar` ;
+
+
+
+CREATE  TABLE IF NOT EXISTS `mydbmina`.`lugar` (
+
+  `idlugar` INT(11) NOT NULL AUTO_INCREMENT ,
+
+  `nombre` VARCHAR(45) NULL DEFAULT NULL ,
+
+  `direccion` TEXT NULL DEFAULT NULL ,
+
+  `latitud` FLOAT NULL DEFAULT NULL ,
+
+  `longitud` FLOAT NULL DEFAULT NULL ,
+
+  PRIMARY KEY (`idlugar`) )
+
+ENGINE = InnoDB
+
+AUTO_INCREMENT = 10
+
+DEFAULT CHARACTER SET = latin1;
+
+
+
+INSERT INTO `lugar` (`idlugar`, `nombre`, `direccion`, `latitud`, `longitud`) VALUES (1,'Cancha de Minas','Av Universitaria 1801 San Miguel',-12.072,-77.0821),(2,'Casa de Denisse','Mariano Cornejo Lima',-12.0681,-77.0763),(3,'Auditorio de Derecho','Av Universitaria 1801 San Miguel',-12.0699,-77.0811),
+(4,'Jockey Club','\"Av. El Derby s/n puerta Nº3, Santiago de Surco.\"',-12.0927,-76.9771),
+(5,'Polideportivo','Av Universitaria 1801 San Miguel',-12.0665,-77.0802),
+(6,'Cineplanet','\"Calle A, San Miguel 15088\"',-12.0758,-77.0839),
+(7,'Parque de la Exposición','\"Paseo Colón 125,\"',-12.0605,-77.0371),
+(8,'Estadio Nacional','\" Calle José Díaz, Lima\"',-12.0673,-77.0337),
+(9,'AELU','Jr. Paracas 565 Pueblo Libre',-12.0733,-77.0771),
+(10,'Pabelllón V','Av Universitaria 1801 San Miguel',-12.0635,-77.1802);
+
+
+-- -----------------------------------------------------
+
+-- Table `mydbmina`.`evento`
+
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `mydbmina`.`evento` ;
+
+
+
+CREATE  TABLE IF NOT EXISTS `mydbmina`.`evento` (
+
+  `idevento` INT(11) NOT NULL AUTO_INCREMENT,
+
+  `nombre` VARCHAR(100) NULL DEFAULT NULL ,
+
+  `descripcion` TEXT NULL DEFAULT NULL ,
+
+  `fecha` TIMESTAMP NULL DEFAULT NULL ,
+
+  `duracion` INT(11) NULL DEFAULT NULL ,
+
+  `activo` TINYINT(1) NULL DEFAULT NULL ,
+
+  `idlugar` INT(11) NOT NULL ,
+  `cancelado` TINYINT(1) NULL DEFAULT NULL ,
+
+  PRIMARY KEY (`idevento`) ,
+
+  INDEX `fk_evento_lugar1` (`idlugar` ASC) ,
+
+  CONSTRAINT `fk_evento_lugar1`
+
+    FOREIGN KEY (`idlugar` )
+
+    REFERENCES `mydbmina`.`lugar` (`idlugar` )
+
+    ON DELETE NO ACTION
+
+    ON UPDATE NO ACTION)
+
+ENGINE = InnoDB
+
+DEFAULT CHARACTER SET = latin1;
+
+
+
+INSERT INTO `evento` (`idevento`, `nombre`, `descripcion`, `fecha`, `duracion`, `activo`, `idlugar`, `cancelado`) VALUES (1,'Pichanga','para seleccinar quien representa a ingenieria por la fibra','2012-05-19 22:00:00',2,1,1,1),(2,'Ensayo danza','a cargo de Denisse','2012-05-18 01:00:00',2,1,2,1),(3,'Día de las Telecomunicaciones','nuestro día','2012-05-17 13:00:00',4,1,3,1),(4,'Seminaro de gestión empresarial','que aburrido','2012-05-22 00:00:00',1,1,3,0),(5,'Concierto de Charly García','entradas desde 50 soles','2012-07-01 02:00:00',3,1,4,1),(6,'Inauguración de Interfacultades','Panda Decampeón','2012-05-24 17:00:00',2,1,5,1),(7,'Estreno - The Avengers','todos los héroes en una sola pela','2012-05-11 03:00:00',2,0,6,1),(8,'Mistura','a  comerrr','2012-09-08 15:00:00',12,1,7,1),(9,'Clasificatorias Mundial','Perú rumbo al Mundial (con fe)','2012-06-03 20:00:00',2,1,8,1),(10,'Karate','técnicas de defensa personal','2012-05-18 16:00:00',1,1,9,0),(11, 'Clase de cocina', 'Casa de ku; comida oriental', '2012-05-19 15:00:00', 3, 1, 6, 1),(12, 'gyncana', 'Integracion teleca', '2012-05-19 15:00:00', 1, 1, 3, 1), (13, 'graduacion ', 'Entrada con invitacion ', '2012-05-19 15:00:00', 2, 1, 3, 1),(14, 'Cumpleaños  miguelon', 'Llevar regalo', '2012-05-19 17:00:00', 3, 1, 3, 1),(15, 'Admision PUCP', 'El alumno debe pedir su codigo verificador', '2012-05-19 13:00:00', 4, 1, 3, 1),(16, 'Entrevista masiva', 'Solo para telecos decentes', '2012-07-19 13:00:00', 5, 1, 5, 1),(17, 'Asesoria de Microodas', 'Solo para alumnos matriculados 2012-1', '2012-07-19 13:00:00', 3, 1, 5, 1),(18, 'Verificacion de documentos', 'Solo para alumnos de ultimos ciclos', '2012-06-24 12:00:00', 6, 1, 3, 1),(19, 'Clase de CISCO', 'Para el publicoa general', '2012-07-12 15:00:00', 5, 1, 2, 1),(20, 'Conferencia de redes IP', 'Redes de ultima generación', '2012-07-25 17:00:00', 6, 1, 2, 1),
+(21, 'Presentación de software2', 'Ultima evaluación de 7mo ciclo', '2012-07-13 13:00:00', 10, 1, 10, 1),
+(139,'Evaluacion de aleman','Dicta kristian', '2012-11-11 13:00:00',7,1,2,1), 
+(140,'Evaluacion de clase de Italiano','Dicta oswaldo', '2012-11-12 13:00:00',10,1,3,1), 
+(141,'Evaluacion de clase de Ruso','Dicta Bubles', '2012-11-13 13:00:00',2,1,4,1), 
+(142,'Evaluacion de clase de Etiqueta','Dicta frida holler', '2012-11-14 13:00:00',3,1,1,1), 
+(143,'Evaluacion de clase de musica maestar','Dicta Jesús REY', '2012-11-15 13:00:00',4,1,2,1), 
+(144,'Reto red bull','TODOS INVITADOS', '2012-11-16 13:00:00',5,1,3,1), 
+(145,'Reto Cristal','TODOS INVITADOS', '2012-11-17 13:00:00',6,1,4,1), 
+(146,'Reto powerade','TODOS INVITADOS', '2012-11-18 13:00:00',7,1,1,1), 
+(147,'Reto gatetorade','TODOS INVITADOS', '2012-11-19 13:00:00',10,1,2,1), 
+(148,'Reto blu','TODOS INVITADOS', '2012-11-20 13:00:00',2,1,3,1), 
+(149,'Reto burn','TODOS INVITADOS', '2012-11-21 13:00:00',3,1,4,1), 
+(150,'Reto sporade','TODOS INVITADOS', '2012-11-22 13:00:00',4,1,1,1), 
+(151,'Reto vanilla','TODOS INVITADOS', '2012-11-23 13:00:00',5,1,2,1), 
+(152,'Reto barena','TODOS INVITADOS', '2012-11-24 13:00:00',6,1,3,1), 
+(153,'Reto pilsen','TODOS INVITADOS', '2012-11-25 13:00:00',7,1,4,1), 
+(154,'Reto inca kola','TODOS INVITADOS', '2012-11-26 13:00:00',10,1,1,1), 
+(155,'Reto coca kola','TODOS INVITADOS', '2012-11-27 13:00:00',2,1,2,1), 
+(156,'Reto debian','TODOS INVITADOS', '2012-11-28 13:00:00',3,1,3,1), 
+(157,'Reto sprite','TODOS INVITADOS', '2012-11-29 13:00:00',4,1,4,1), 
+(158,'Reto fanta','TODOS INVITADOS', '2012-11-30 13:00:00',5,1,1,1), 
+(159,'Reto cusqueña','TODOS INVITADOS', '2012-12-01 13:00:00',6,1,2,1), 
+(160,'Reto seven up','TODOS INVITADOS', '2012-12-02 13:00:00',7,1,3,1), 
+(161,'Entrega de premios al mejor amigo teleco','TODOS INVITADOS', '2012-12-03 13:00:00',10,1,4,1), 
+(162,'La fiesta fin de finales de xino ku','TODOS INVITADOS', '2012-12-04 13:00:00',2,1,1,1), 
+(163,'Presentación de informe final de sw2','TODOS INVITADOS', '2012-12-05 13:00:00',3,1,2,1), 
+(164,'Cumple de panda','TODOS INVITADOS', '2012-12-06 13:00:00',4,1,3,1), 
+(165,'Eleccion del padrino teleco','TODOS INVITADOS', '2012-12-07 13:00:00',5,1,4,1), 
+(166,'Eleccion del grupo 2012','TODOS INVITADOS', '2012-12-08 13:00:00',6,1,1,1), 
+(167,'Eleccion del profesor del 2012','TODOS INVITADOS', '2012-12-09 13:00:00',7,1,2,1), 
+(168,'Elecciones de asesores','TODOS INVITADOS', '2012-12-10 13:00:00',10,1,3,1), 
+(169,'Elecciones mineras','TODOS INVITADOS', '2012-12-11 13:00:00',2,1,4,1), 
+(170,'Elecciones electronicas','TODOS INVITADOS', '2012-12-12 13:00:00',3,1,1,1), 
+(171,'Elecciones mecatronicas','TODOS INVITADOS', '2012-12-13 13:00:00',4,1,2,1), 
+(172,'Elecciones industriales','TODOS INVITADOS', '2012-12-14 13:00:00',5,1,3,1), 
+(173,'Elecciones informaticas','TODOS INVITADOS', '2012-12-15 13:00:00',6,1,4,1), 
+(174,'Elecciones civiles','TODOS INVITADOS', '2012-12-16 13:00:00',7,1,1,1), 
+(175,'Elecciones telecas','TODOS INVITADOS', '2012-12-17 13:00:00',10,1,2,1), 
+(176,'cumple de mascota de mecatronica','TODOS INVITADOS', '2012-12-18 13:00:00',2,1,3,1), 
+(177,'Cumple de electrito','TODOS INVITADOS', '2012-12-19 19:00:00',3,1,4,1), 
+(178,'Cumple de leon mecanico','TODOS INVITADOS', '2012-12-20 13:00:00',4,1,1,1), 
+(179,'Cumple de telito','TODOS INVITADOS', '2012-12-20 13:00:00',5,1,2,1), 
+(180,'cumple de patan','TODOS INVITADOS', '2012-12-21 13:00:00',6,1,3,1), 
+(181,'Cumple de mascota minera','TODOS INVITADOS', '2012-12-22 13:00:00',7,1,4,1), 
+(182,'Cumple de diablo industrial','TODOS INVITADOS', '2012-12-23 13:00:00',10,1,1,1), 
+(183,'Cumple de la hormiga armada','TODOS INVITADOS', '2012-12-24 13:00:00',2,1,2,1), 
+(184,'NAVIDAD','KALOX nos invita a su casa', '2012-12-25 13:00:00',3,1,3,1), 
+(185,'Cena anual de telecomunicaciones','Asistir con smoking ', '2012-12-26 22:00:00',4,1,4,1), 
+(186,'Misa previo año nuevo','Un momento de reflexion al lado detus mejores amigos', '2012-12-27 10:00:00',5,1,1,1), 
+(187,'Final del mundo anual','Diegos y Xibolines intentarán jugar Futbol una vez más', '2012-12-28 14:00:00',6,1,2,1), 
+(188,'Fiesta anual de telecomunicaciones','Organiza AITEL 2013', '2012-12-29 22:00:00',7,1,3,1), 
+(189,'Despedida anual','Despedida a la fibra que se va de intercambio', '2012-12-30 20:00:00',10,1,4,1), 
+(190,'Fiesta de fin de año','Cotillón incluido, corcho libre', '2012-12-31 13:00:00',2,1,1,1), 
+(191,'Primera reunion de AITEL en el 2013','Todos juntos por la fibra', '2013-01-03 13:00:00',3,1,2,1), 
+(192,'Salida de campo final','Organiza aire puro', '2012-12-03 10:00:00',4,1,3,1), 
+(193,'Dia de Cierra puertas','Ripley-para clientes por navidad', '2012-12-03 08:00:00',5,1,4,1), 
+(194,'Entrega de proyectos finales','Ultima evaluación de 9 mo ciclo', '2012-12-03 13:00:00',6,1,1,1),
+(120,'Semana de ingeniería finales','Final cocina ', '2012-10-23 13:00:00',2,1,3,1), 
+(121,'Semana de ingeniería finales','Final salto alto ', '2012-10-24 13:00:00',3,1,4,1), 
+(122,'Semana de ingeniería finales','Final salto largo ', '2012-10-25 13:00:00',4,1,1,1), 
+(123,'Semana de ingeniería finales','Final gymnasia pesada ', '2012-10-26 13:00:00',5,1,2,1), 
+(124,'clases de koreano','Dicta xino Chang', '2012-10-27 13:00:00',6,1,3,1), 
+(125,'Clase de chino mandarin','Dicta xino ku', '2012-10-28 13:00:00',7,1,4,1), 
+(126,'Clase de japones','Dicta xino okawa', '2012-10-29 13:00:00',10,1,1,1), 
+(127,'Clase de portugues','Dicta Cyndi', '2012-10-30 13:00:00',2,1,2,1), 
+(128,'Clase de catalan','Dicta Alan', '2012-10-31 13:00:00',3,1,3,1), 
+(129,'Clase de aleman','Dicta kristian', '2012-11-01 13:00:00',4,1,4,1), 
+(130,'Clase de Italiano','Dicta oswaldo', '2012-11-02 13:00:00',5,1,1,1), 
+(131,'Clase de ruso ','Dicta Bubles', '2012-11-03 13:00:00',6,1,2,1), 
+(132,'Clase de etiqueta','Dicta frida holler', '2012-11-04 13:00:00',7,1,3,1), 
+(133,'Clase de musica maestra','Dicta Jesús REY', '2012-11-05 13:00:00',10,1,4,1), 
+(134,'Evaluacion de clase de koreano','Dicta xino Chang', '2012-11-06 13:00:00',2,1,1,1), 
+(135,'Evaluacion de clase de chino mandarin','Dicta xino ku', '2012-11-07 13:00:00',3,1,2,1), 
+(136,'Evaluacion de clase de japones','Dicta xino okawa', '2012-11-08 13:00:00',4,1,3,1), 
+(137,'Evaluacion de clase de portugues','Dicta Cyndi', '2012-11-09 13:00:00',5,1,4,1), 
+(138,'Evaluacion de clase de catalan','Dicta Alan', '2012-11-10 13:00:00',6,1,1,1),
+(96,'Semana de ingeniería finales','Final futsal varones tele vs civil ', '2012-09-29 13:00:00',6,1,3,1), 
+(97,'Semana de ingeniería finales','Final futsal damas tele vs electronica ', '2012-09-30 13:00:00',7,1,4,1), 
+(98,'Semana de ingeniería finales','Final voleyball damas tele vs industrial ', '2012-10-01 13:00:00',10,1,1,1), 
+(99,'Semana de ingeniería finales','Final voleyball varones tele vs informatica ', '2012-10-02 13:00:00',2,1,2,1), 
+(100,'Semana de ingeniería finales','Final tenis de mesa individual tele vs mecanica ', '2012-10-03 13:00:00',3,1,3,1), 
+(101,'Semana de ingeniería finales','Final tenis de mesa dobles tele vs mecanica ', '2012-10-04 13:00:00',4,1,4,1), 
+(102,'Semana de ingeniería finales','Final atletismo damas ', '2012-10-05 13:00:00',5,1,1,1), 
+(103,'Semana de ingeniería finales','Final atletismo varones ', '2012-10-06 13:00:00',6,1,2,1), 
+(104,'Semana de ingeniería finales','Final ciclismo damas ', '2012-10-07 13:00:00',7,1,3,1), 
+(105,'Semana de ingeniería finales','Final ciclismo varones ', '2012-10-08 13:00:00',10,1,4,1), 
+(106,'Semana de ingeniería finales','Final ajedrez tele vs informatica ', '2012-10-09 13:00:00',2,1,1,1), 
+(107,'Semana de ingeniería finales','Final natacion  ', '2012-10-10 13:00:00',3,1,2,1), 
+(108,'Semana de ingeniería finales','Final aerobics', '2012-10-11 13:00:00',4,1,3,1), 
+(109,'Semana de ingeniería finales','Final caceria extraña ', '2012-10-12 13:00:00',5,1,4,1), 
+(110,'Semana de ingeniería finales','Final frontón  tele vs civil', '2012-10-13 13:00:00',6,1,1,1), 
+(111,'Semana de ingeniería finales','Final baileton bladi vs los otros ', '2012-10-14 13:00:00',7,1,2,1), 
+(112,'Semana de ingeniería finales','Final declatón académico civil vs tele ', '2012-10-15 13:00:00',10,1,3,1), 
+(113,'Semana de ingeniería finales','Final danza peruana ', '2012-10-16 13:00:00',2,1,4,1), 
+(114,'Semana de ingeniería finales','Final canto ', '2012-10-17 13:00:00',3,1,1,1), 
+(115,'Semana de ingeniería finales','Final reciclaje ', '2012-10-18 13:00:00',4,1,2,1), 
+(116,'Semana de ingeniería finales','Final pintale al payaso ', '2012-10-19 13:00:00',5,1,3,1), 
+(117,'Semana de ingeniería finales','Final winnig eleven ', '2012-10-20 13:00:00',6,1,4,1), 
+(118,'Semana de ingeniería finales','Final start craft ', '2012-10-21 13:00:00',7,1,1,1), 
+(119,'Semana de ingeniería finales','Final DOTA ', '2012-10-22 13:00:00',10,1,2,1), 
+(30,'Desfile canino','Auspiciado por sociedad peruana de animales', '2012-07-25 13:00:00',3,1,10,1), 
+(31,'Evalucion de teatro y danza contemporanea','Llegar tarde no es una opción', '2012-07-26 10:00:00',4,1,11,1),
+(32,'Presentación de nuevo elenco TUC','Todos los participantes llevar sus respectivos tickets', '2012-07-27 20:00:00',5,1,12,1), 
+(33,'Día de la comida peruana','Auspiciado por INCA KOLA', '2012-07-27 13:00:00',6,1,10,1), 
+(34,'Seguridad vial','Si se concientiza, podrá tener una tarde reflexiva', '2012-07-29 13:00:00',7,1,11,1), 
+(35,'Dia del amigo PUCP','Corcho libre, evento limitado de asistentes', '2012-07-30 13:00:00',10,1,12,1), 
+(36,'Pintball extremo','Organizado por Hernan Romano Curo', '2012-07-31 13:00:00',2,1,10,1), 
+(37,'Competencia mundial de Monopoly ','Adquirir su monopolio a la entrada al evento', '2012-08-01 13:00:00',3,1,11,1), 
+(38,'Desarrollo y caida de proyecto electronico','Ultima evaluación de 9 mo ciclo', '2012-08-02 08:00:00',4,1,12,1), 
+(39,'Cumpleaños de kul','Auspiciado por el lado helado', '2012-08-03 22:00:00',5,1,10,1), 
+(40,'Buscando al panda 2012','Termito no es una opción', '2012-08-04 13:00:00',6,1,11,1), 
+(41,'Inicio de selección de alumnos para becas ','Dirigido para alumnos de 7 y 8vo ciclo', '2012-08-05 13:00:00',7,1,12,1), 
+(42,'Buscando al pepon 2012','Todo es posible', '2012-08-06 13:00:00',10,1,10,1), 
+(43,'Buscando a la madrina  2012','Muchas opciones', '2012-08-07 13:00:00',2,1,11,1), 
+(44,'Buscando al señorito de tele 2012','Abierto a todo publico', '2012-08-08 13:00:00',3,1,12,1), 
+(45,'Entrenamiento de  ciclimo2012','Etapa final', '2012-08-09 13:00:00',4,1,10,1), 
+(46,'Reclutando deportistas 2012','ultima etapa', '2012-08-10 13:00:00',5,0,11,1), 
+(47,'Gyncana Civil','Se parte del equipo teleco', '2012-08-11 13:00:00',6,1,12,1), 
+(48,'Gyncana informatica','Abierta al publico en general', '2012-08-12 13:00:00',7,1,10,1), 
+(49,'Gyncana eletronica','Quieren campeonar', '2012-08-13 13:00:00',10,0,11,1), 
+(50,'Gyncana Industrial','Rudy y micky invitan', '2012-08-14 13:00:00',2,1,12,1), 
+(51,'Debate minero','Una de las cosas mas extrañas pero inevitables', '2012-08-15 13:00:00',3,1,10,1), 
+(52,'gyncana mecatronica','Conociendo a los nuevos valores', '2012-08-16 13:00:00',4,1,11,1), 
+(53,'Gyncana mecanica','Pago minimo 30 soles', '2012-08-17 13:00:00',5,1,12,1), 
+(54,'Inicio de semana de ingeniería','Un inevitable evento', '2012-08-18 13:00:00',6,1,10,1), 
+(55,'Presentacion parcial de tesis1','Evaluado por el Dr. Silva', '2012-08-19 13:00:00',7,1,11,1), 
+(56,'Gyncana de semana de ingenieria','Auspiciado por gatorade', '2012-08-20 13:00:00',10,1,12,1), 
+(57,'Presentación de la Peña','Ultima evaluación de 10 mo ciclo', '2012-08-21 13:00:00',2,1,10,1), 
+(58,'Presentación de scketch','Ultima evaluación de 8 mo ciclo', '2012-08-22 13:00:00',3,1,11,1), 
+(59,'Prueba de ciclismo ingenieria  2012','Ultima evaluación de 9 mo ciclo', '2012-08-23 13:00:00',4,1,12,1), 
+(60,'Prueba de natación ingenieria 2012','Ultima evaluación de 10 mo ciclo', '2012-08-24 13:00:00',5,1,10,1), 
+(61,'Reunion de techo para mi país ','Dia 1 elaboración de plan', '2012-08-25 13:00:00',6,1,11,1), 
+(62,'Reunion de techo para mi país ','Dia 2 elaboración de plan', '2012-08-26 13:00:00',7,1,12,1), 
+(63,'Reunion de techo para mi país ','Dia 3 elaboración de plan', '2012-08-27 13:00:00',10,1,10,1), 
+(64,'Reunion de techo para mi país ','Dia 4 desarrollo de plan', '2012-08-28 13:00:00',2,1,11,1), 
+(65,'Reunion de techo para mi país ','Dia 5 desarrollo de plan', '2012-08-29 13:00:00',3,1,12,1), 
+(66,'Reunion de techo para mi país ','Dia 6 desarrollo de plan', '2012-08-30 13:00:00',4,1,10,1), 
+(67,'Reunion de techo para mi país ','Dia 7 desarrollo de plan', '2012-08-31 13:00:00',5,1,11,1), 
+(68,'Reunion de techo para mi país ','Dia 8 desarrollo de plan', '2012-09-01 13:00:00',6,1,12,1), 
+(69,'Reunion de techo para mi país ','Dia 9 desarrollo de plan', '2012-09-02 13:00:00',7,1,10,1), 
+(70,'Reunion de techo para mi país ','Dia 10 desarrollo de plan', '2012-09-03 13:00:00',10,0,11,1), 
+(71,'Reunion de techo para mi país ','Dia 11 entrega', '2012-09-04 13:00:00',2,1,12,1), 
+(72,'Reunion de techo para mi país ','Dia 12 entrega', '2012-09-05 13:00:00',3,0,10,1),
+(73,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-06 13:00:00',4,1,11,1), 
+(74,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-07 13:00:00',5,1,12,1), 
+(75,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-08 13:00:00',6,1,10,1), 
+(76,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-09 13:00:00',7,1,11,1), 
+(77,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-10 13:00:00',10,1,12,1), 
+(78,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-11 13:00:00',2,1,10,1), 
+(79,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-12 13:00:00',3,1,11,1), 
+(80,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-13 13:00:00',4,1,12,1), 
+(81,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-14 13:00:00',5,1,10,1), 
+(82,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-15 13:00:00',6,1,11,1), 
+(83,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-16 13:00:00',7,1,12,1), 
+(84,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-17 13:00:00',10,1,10,1), 
+(85,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-18 13:00:00',2,1,11,1), 
+(86,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-19 13:00:00',3,1,12,1), 
+(87,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-20 13:00:00',4,1,1,1), 
+(88,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-21 13:00:00',5,1,2,1), 
+(89,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-22 13:00:00',6,1,3,1), 
+(90,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-23 13:00:00',7,1,1,1), 
+(91,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-24 13:00:00',10,1,2,1), 
+(92,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-25 13:00:00',2,1,3,1), 
+(93,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-26 13:00:00',3,1,4,1), 
+(94,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-27 13:00:00',4,1,1,1), 
+(95,'Reclutamiento del CAPU','Solo para misiones especiales', '2012-09-28 13:00:00',5,1,2,1),
+(22,'FIESTA HELADA','EL xino Ku invita todo unica forma de entrada llevar alguien helado', '2012-07-17 13:00:00',2,1,11,1), 
+(23,'Congreso anual fibra','Todos los participantes asistir con su polo de fibra respectivo', '2012-07-18 13:00:00',3,1,12,1), 
+(24,'Elaboración de programa anual de telecomunicaciones en la pucp','Todos los alumnos deberan ingresar con TI', '2012-07-19 13:00:00',4,1,10,1), 
+(25,'Presentación de informes de PSP','Cualquier duda o consulta el Ing. Chavez esta dispuesto a conversar', '2012-07-20 13:00:00',5,1,11,1), 
+(26,'Gynkana TELECA','No olvidar formar equipos de 20 personas como mínimo y realizar los pagos necesarios', '2012-07-21 13:00:00',6,1,12,1), 
+(27,'Curso gratuito de CCNA ','Dicatado por el Ing.Gardini', '2012-07-22 13:00:00',7,1,10,1), 
+(28,'Entrevista para becas de ingles ','Solo para alumnos con craest mayor a 50', '2012-07-23 13:00:00',10,1,11,1),
+(29,'Presentacion de propuestas de Tesis 2012-2','Para todos los interesados', '2012-07-24 13:00:00',2,1,12,1); 
+ 
+
+
+
+
+
+
+
+-- -----------------------------------------------------
+
+-- Table `mydbmina`.`usuario`
+
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `mydbmina`.`usuario` ;
+
+
+
+CREATE  TABLE IF NOT EXISTS `mydbmina`.`usuario` (
+
+  `idusuario` BIGINT(20) NOT NULL AUTO_INCREMENT,
+
+  `nombre` VARCHAR(45) NULL DEFAULT NULL ,
+
+  `apellido` VARCHAR(45) NULL DEFAULT NULL ,
+
+  `usuario` VARCHAR(45) NULL DEFAULT NULL ,
+
+  `contrasena` BLOB(45) NULL DEFAULT NULL ,
+
+  `correo` VARCHAR(100) NULL DEFAULT NULL ,
+
+  `administrador` TINYINT(1) NOT NULL ,
+
+  `estado_logueo` TINYINT(1) NOT NULL ,
+
+  PRIMARY KEY (`idusuario`) )
+
+ENGINE = InnoDB
+
+DEFAULT CHARACTER SET = latin1;
+
+ALTER TABLE `mydbmina`.`usuario` ADD UNIQUE INDEX `correo_UNIQUE` (`correo` ASC) ;
+
+    INSERT INTO `usuario` (`idusuario`, `nombre`, `apellido`, `usuario`, `contrasena`, `correo`, `administrador`, `estado_logueo`) VALUES (1,'REBECA YSABEL','CÁCERES CÉSPEDES','r.caceres', AES_ENCRYPT('20123081','llave'),'wiiwii941@hotmail.com',0,1),
+(2,' MAIN GRACIELA','TENORIO PALOMINO','m.tenorio',AES_ENCRYPT('20123073','llave'),'maWin-06@hotmail.com',0,1),
+(3,'DAVID CÉSAR','YATACO LÓPEZ','d.yataco',AES_ENCRYPT('20123026','llave'),'davidcesarcyataco@gmail.com',0,1),
+(4,'JULIO DARIO','ALVARADO ZUÑIGA','j.alvarado',AES_ENCRYPT('20122986','llave'),'jjuliodario_1995@hotmail.com',0,1),
+(5,'RODRIGO ERNESTO','QUINTANA HAU','r.quintana',AES_ENCRYPT('20122401','llave'),'reqh_10951@hotmail.com',0,1),
+(6,'SARIAH SHIRLEY','SILVA FERNANDEZ','s.silva',AES_ENCRYPT('20122098','llave'),'sariah.silvas@hotmail.com',0,1),
+(7,'ALVARO FRANK','RODRÍGUEZ TINCOPA','a.rodriguez',AES_ENCRYPT('20122081','llave'),'alvaro_da96@hotmail.com',0,1),
+(8,'KEVIN','LÓPEZ ROMERO','k.lopez',AES_ENCRYPT('20122067','llave'),'kevin_master510@hotmail.com',0,1),
+(9,'BRANCO FHARID','DE LA CRUZ NAUPA','b.delacruz',AES_ENCRYPT('20122063','llave'),'branco10@hotmail.com',0,0),
+(10,'CLAUDIA SILVIA','ALBA ALVARADO','c.alba',AES_ENCRYPT('20122056','llave'),'ca995ammot@hotmail.com',0,0),
+(11,'JUDYTH TIFANY BRISSETTE','SÁNCHEZ CHAUPIN','j.sanchez',AES_ENCRYPT('20122047','llave'),'judith_sc01@hotmail.com',0,0),
+(12,'WENDY FIORELLA','OSORIO MACASSI','w.osorio',AES_ENCRYPT('20122028','llave'),'wendy.osorio216@hotmail.com',0,0),
+(13,'JAIME JEAN FRANCO','CALDERÓN SUAREZ','j.calderon',AES_ENCRYPT('20122024','llave'),'jeanfranco28@hotmail.com',0,0),
+(14,'CARLOS ALBERTO','CASTAÑEDA FALLA','c.castañeda',AES_ENCRYPT('20122016','llave'),'castaneda@incot.com.pe',0,0),
+(15,'WILLY','TOVAR PÁRRAGA','w.tovar',AES_ENCRYPT('20122013','llave'),'snt_13@hotmail.com',0,0),
+(16,'RODRIGO JHESUS','PEÑA ALVAREZ','r.pena',AES_ENCRYPT('20122006','llave'),'penarobles67@hotmail.com',0,1),
+(17,'CHRISTIHAN JOEL','LAUREL BRAVO','c.laurel',AES_ENCRYPT('20122004','llave'),'christihan_5@hotmail.com',0,1),
+(18,'ROSA MARÍA','RIVERA VÉLIZ','r.rivera',AES_ENCRYPT('20122003','llave'),'rosita2005@hotmail.com',0,1),
+(19,'GREYSSI YESENIA','MALPARTIDA LLONTOP','g.malpartida',AES_ENCRYPT('20121982','llave'),'sweet-girl.ja@hotmail.com',0,1),
+(20,'JULIO ENRIQUE','RIVERA DE LA ROSA','j.rivera',AES_ENCRYPT('20121968','llave'),'jer_rait2@yahoo.es',0,1),
+(21,'STEPHANIE ISABEL','SÁNCHEZ CONTRERAS','s.sanchez',AES_ENCRYPT('20121967','llave'),'s_tefi_ge@hotmail.com',0,1),
+(22,'JORGE OMAR','FERNÁNDEZ DE PAREDES ANDRADE','j.fernandez',AES_ENCRYPT('20121960','llave'),'jomar11@hotmail.com',0,1),(23,'YOLINELLA PATRICIA','GIL RIVAS PLATA','y.gil',AES_ENCRYPT('20121946','llave'),'yolinella_22@hotmail.com',0,1),(24,'KATHERINE','DIAZ MATTA','k.diaz',AES_ENCRYPT('20121943','llave'),'kat22@hotmail.com',0,1),
+(26,'KATHERINE ROSSELYN','LOZANO RAMOS','k.lozano',AES_ENCRYPT('20121918','llave'),'qatii.a1@hotmail.com',0,1),(27,'SUSANA VIRGINIA','ORDAYA LOCK','s.ordaya',AES_ENCRYPT('20121911','llave'),'susana8@hotmail.com',0,1),(28,'PABLO RAFAEL','TINEO MORALES','p.tineo',AES_ENCRYPT('20121907','llave'),'dragon.jaja@yahoo.es',0,1),(29,'JENNIFER MERCEDES','FIGUEROA RODRIGUEZ','j.figueroa',AES_ENCRYPT('20121905','llave'),'jemerc17@hotmail.com',0,1),(30,'DIEGO BLAS','OBREGÓN VELARDE','d.obregon',AES_ENCRYPT('20121890','llave'),'diego_78@hotmail.com',0,1),(31,'JOCELYM VALERIA','AVALOS MALAPI','j.avalos',AES_ENCRYPT('20121886','llave'),'bonis_cone11@hotmail.com',0,1),
+(32,'LUIGI ALEJANDRO','FLORES ROJAS','l.flores',AES_ENCRYPT('20121875','llave'),'lui-f90@hotmail.es',0,1),
+(33,'JHOEL JESUS JHON','MEDINA MEDINA','j.medina',AES_ENCRYPT('20121869','llave'),'jhoelx_19@hotmail.com',0,1),
+(34,'RENATO GABRIEL','QUIROZ RIVERA','r.quiroz',AES_ENCRYPT('20121854','llave'),'gaboquiroz_98@hotmail.com',0,1),
+(35,'JOSE LUIS','BRAVO LUNA','j.bravo',AES_ENCRYPT('20121849','llave'),'jl_32@hotmail.com',0,1),
+(36,'RENZO CARLOS','RAMIREZ RAMIREZ','r.ramirez',AES_ENCRYPT('20121793','llave'),'renzo_carlos_12@hotmail.com',0,1),
+(37,'LEONEL RENATO','VALVERDE CANCHA','l.valverde',AES_ENCRYPT('20121770','llave'),'gissalessia.1@hotmail.com',0,1),
+(38,'ISMAEL MASHARO','VARGAS QUISPE','i.vargas',AES_ENCRYPT('20121754','llave'),'masharo.uvk1@hotmail.com',0,1),
+(39,'KATHERINE','MONJE FERREYRA','k.monje',AES_ENCRYPT('20121727','llave'),'katy_mf15@hotmail.com',0,1),
+(40,'ALEX OSCAR','AGUILA CAMPOS','a.aguila',AES_ENCRYPT('20121723','llave'),'alex_aguila_campos22@hotmail.com',0,1),
+(41,'ISABEL MELINA','DIAZ ALARCON','i.diaz',AES_ENCRYPT('20121707','llave'),'capr3enr_isa11@hotmail.com',0,1),
+(42,'MANUEL ANGEL','MENDIETA AGUILAR','m.mendieta',AES_ENCRYPT('20121699','llave'),'manuela_204@hotmail.com',0,1),
+(43,'PAULO CESAR','CHIRINOS LEON','p.chirinos',AES_ENCRYPT('20121677','llave'),'paulo_c1@hotmail.com',0,1),
+(44,'CESIA BETEL','CARRANZA CONTRERAS','c.carranza',AES_ENCRYPT('20121668','llave'),'ymcc7@hotmail.com',0,1),
+(45,'RICHARD ALONSO','RODRÍGUEZ REA','r.rodriguez',AES_ENCRYPT('20121659','llave'),'lasi.y@hotmail.com',0,1),
+(46,'ANTONIO JOSE','SANDOVAL HURTADO','a.sandoval',AES_ENCRYPT('20121655','llave'),'tony_1@hotmail.com',0,1),
+(47,'ANTHONY ALEXIS','AYALA OJEDA','a.ayala',AES_ENCRYPT('20121633','llave'),'alexis_33@hotmail.com',0,1),
+(48,'JESUS MAURICIO','CASTAÑEDA MONZÓN','j.castañeda',AES_ENCRYPT('20121617','llave'),'j_mauricio_66@hotmail.com',0,1),
+(49,'JUAN JAVIER','JUGO CASTRO','j.jugo',AES_ENCRYPT('20121609','llave'),'juanjc099@hotmail.com',0,1),
+(50,'ALONSO','GARRO MENDIOLA','a.garro',AES_ENCRYPT('20121588','llave'),'alonsog221@gmail.com',0,1),
+(51,'JORGE LUIS ISAAC','RAMIREZ CHAVEZ','j.ramirez',AES_ENCRYPT('20121546','llave'),'ramirezjchavez1112@hotmail.com',0,1),
+(52,'FRANCO','SANCHEZ TORRES','f.sanchez',AES_ENCRYPT('20122003','llave'),'franco.st@hotmail.com',0,1),
+(53,'ARY JERSON','OCHOA ACEVEDO','a.ochoa',AES_ENCRYPT('20121588','llave'),'alonsog2@gmail.com',0,1),
+(510,'JORGE LUIS ISAAC','RAMIREZ CHAVEZ','j.ramirez',AES_ENCRYPT('20121546','llave'),'ramirezjchavez11@hotmail.com',0,1),
+(520,'FRANCO','SANCHEZ TORRES','f.sanchez',AES_ENCRYPT('20121365','llave'),'aryloca.1@hotmail.com',0,1),
+(54,'JOSUE MANUEL','LLAQUE AGRAMONTE','j.llaque',AES_ENCRYPT('20120691','llave'),'hsm_josue.ll@hotmail.com',0,0),
+(55,'FERNANDO OMAR','OCHOA OLIDEN','f.ochoa',AES_ENCRYPT('20121261','llave'),'fernando.qr@hotmail.com',0,0),
+(56,'IRWING FRANCISCO','RENTERÍA ORÉ','i.renteria',AES_ENCRYPT('20121617','llave'),'x.renteria@hotmail.com',0,1),
+(57,'GLORIA ETHEL PENELOPE','VALENZUELA SANCHEZ','g.valenzuela',AES_ENCRYPT('20120094','llave'),'gloria.v22@hotmail.com',0,1),
+(58,'KALOX','DIOSES FIBRA','k.dioses',AES_ENCRYPT('20072345','llave'),'kalox.eldios@heaven.com',1,1),
+(59,'JUAN GONZALO','CACERES PEREZ','j.caceres',AES_ENCRYPT('20121010','llave'),'caceresj@hotmail.com',0,0),
+(60,'DENISE','HERMOZA MARTIARENA','20080336',AES_ENCRYPT('20080336','llave'),'denise.hermoza@pucp.pe',0,1),
+(79,'JEISON','BERAUN MEDRANO','20077026',AES_ENCRYPT('20077026','llave'),'e.beraun@pucp.pe',0,1),
+(80,'AYMIN MINA','MARIN CASTRO','20074102',AES_ENCRYPT('20074102','llave'),'aymin.marin@pucp.pe',0,1),
+(81,'AYNER','PEREZ TITO','20064756',AES_ENCRYPT('20064756','llave'),'aperezt@pucp.pe',0,1),
+(82,'CHRISTIAN','KU LAM','20084953',AES_ENCRYPT('20084953','llave'),'c4.christian@gmail.com',0,1),
+(83,'MIGUEL','ARROYO','20080315',AES_ENCRYPT('20080315','llave'),'arroyor.ma@pucp.edu.pe',0,1),
+(84,'AURELIO','CHAVEZ RAMOS','20057220',AES_ENCRYPT('20057220','llave'),'aurelio.chavez@pucp.pe',0,1),
+(85,'CINDY','FERNANDEZ CACERES','20062082',AES_ENCRYPT('20062082','llave'),'cindy.fernandez@pucp.edu.pe',0,1),
+(86,'KRISTIAM EDUARDO','TORRES ASCENCIO','20062239',AES_ENCRYPT('20062239','llave'),'kristiam.torresa@pucp.pe',0,1),
+(87,'AARON JOSE','VILLA LONGA','20074089',AES_ENCRYPT('20074089','llave'),'aaron.villa@pucp.edu.pe',0,1),
+(88,'CHRISTIAN DANIEL','SALVADOR GARCIA','20060267',AES_ENCRYPT('20060267','llave'),'c.salvador@pucp.pe',0,1),
+(89,'SOFTWARE','TELECOMUNICACIONES PUCP','SW2',AES_ENCRYPT('0000','llave'),'sw2@pucp.pe',0,1);
+
+    
+-- -----------------------------------------------------
+
+-- Table `mydbmina`.`calendario`
+
+-- -----------------------------------------------------
+
+DROP TABLE IF EXISTS `mydbmina`.`calendario` ;
+
+
+
+CREATE  TABLE IF NOT EXISTS `mydbmina`.`calendario` (
+
+  `idcalendario` INT(11) NOT NULL AUTO_INCREMENT ,
+
+  `idusuario` BIGINT(20) NOT NULL ,
+
+  `idevento` INT(11) NOT NULL ,
+
+  `recordatorio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ,
+
+  PRIMARY KEY (`idcalendario`) ,
+
+  INDEX `fk_usuario_has_evento_evento1` (`idevento` ASC) ,
+
+  INDEX `fk_usuario_has_evento_usuario1` (`idusuario` ASC) ,
+
+  CONSTRAINT `fk_usuario_has_evento_evento1`
+
+    FOREIGN KEY (`idevento` )
+
+    REFERENCES `mydbmina`.`evento` (`idevento` )
+
+    ON DELETE NO ACTION
+
+    ON UPDATE NO ACTION,
+
+  CONSTRAINT `fk_usuario_has_evento_usuario1`
+
+    FOREIGN KEY (`idusuario` )
+
+    REFERENCES `mydbmina`.`usuario` (`idusuario` )
+
+    ON DELETE NO ACTION
+
+    ON UPDATE NO ACTION)
+
+ENGINE = InnoDB
+
+AUTO_INCREMENT = 32
+
+DEFAULT CHARACTER SET = latin1;
+ALTER TABLE `mydbmina`.`calendario` CHANGE COLUMN `recordatorio` `recordatorio` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  ;
+
+
+INSERT INTO `calendario` (`idcalendario`, `idusuario`, `idevento`, `recordatorio`) VALUES (1,24,1,'2012-05-19 15:00:00'),
+(2,25,5,'2012-06-30 01:00:00'),(3,12,10,'2012-05-18 01:00:00'),(4,13,3,'2012-05-17 01:00:00'),(5,3,8,'2012-09-08 01:00:00'),(6,27,8,'2012-09-08 03:00:00'),(7,17,6,'2012-05-24 15:00:00'),(8,33,7,'2012-05-10 17:00:00'),(9,44,1,'2012-05-19 16:00:00'),(10,41,1,'2012-05-18 17:00:00'),(11,1,2,'2012-05-17 05:00:00'),
+(12,9,3,'2012-05-16 05:00:00'),(13,20,4,'2012-05-20 15:00:00'),(14,11,4,'2012-05-21 01:00:00'),(15,10,2,'2012-05-17 11:00:00'),(16,2,9,'2012-06-03 14:00:00'),
+(17,50,5,'2012-06-30 17:00:00'),(18,49,1,'2012-05-19 15:00:00'),(19,34,5,'2012-06-30 15:00:00'),(20,31,7,'2012-05-10 20:00:00'),(21,4,5,'2012-06-30 02:00:00'),(22,52,9,'2012-06-03 15:00:00'),(23,51,10,'2012-05-18 13:00:00'),(24,15,1,'2012-05-19 15:00:00'),(25,13,4,'2012-05-19 03:00:00'),(26,55,2,'2012-05-17 22:39:23'),(27,8,5,'2012-06-30 03:00:00'),(28,27,6,'2012-05-24 13:00:00'),(29,37,8,'2012-09-08 02:00:00'),(30,38,5,'2012-06-30 17:00:00'),(31,6,2,'2012-05-17 11:00:00'),(32,4,1,'2012-05-19 10:00:00'),(33,13,10,'2012-05-18 11:00:00'),
+(34,37,1,'2012-05-19 10:00:00'),(35,4,9,'2012-06-02 20:00:00'),(36,13,6,'2012-05-23 20:00:00'),
+(37,13,8,'2012-09-07 21:00:00'),(38,4,8,'2012-09-06 22:00:00'),(39,8,2,'2012-05-16 20:00:00'),
+(40,4,5,'2012-06-25 12:00:00'),(41, 3, 3, '2012-06-25 12:00:00'),(42, 4, 2, '2012-06-25 12:00:00'),
+(43, 55, 12, '2012-05-15 12:00:00'),(44, 34, 20, '2012-05-16 12:00:00'),
+(45, 35, 17, '2012-05-17 12:00:00'),(46, 26, 15, '2012-05-25 12:00:00'),
+(47, 35, 19, '2012-05-18 12:00:00'),(48, 56, 10, '2012-05-17 12:00:00'),(49, 85, 11, '2012-05-18 12:00:00'),
+(50, 34, 12, '2012-05-18 12:00:00'),(51, 60, 21, '2012-07-11 12:00:00'),(52, 79, 21, '2012-07-11 12:00:00'),
+(53, 80, 20, '2012-07-13 08:00:00'),(65, 80, 19, '2012-07-10 12:00:00'),(77, 80, 21, '2012-06-24 12:00:00'),
+(54, 81, 20, '2012-07-13 08:00:00'),(66, 81, 19, '2012-07-11 12:00:00'),(78, 81, 21, '2012-06-23 12:00:00'),
+(55, 82, 20, '2012-07-13 08:00:00'),(67, 82, 19, '2012-06-22 12:00:00'),(79, 82, 21, '2012-06-21 12:00:00'),
+(56, 83, 20, '2012-06-21 12:00:00'),(68, 83, 19, '2012-07-11 12:00:00'),(80, 83, 21, '2012-07-11 12:00:00'),
+(57, 84, 20, '2012-06-23 12:00:00'),(69, 84, 19, '2012-06-12 12:00:00'),(81, 84, 21, '2012-07-11 12:00:00'),
+(58, 85, 20, '2012-07-13 12:00:00'),(70, 85, 19, '2012-07-11 12:00:00'),(82, 85, 21, '2012-06-29 12:00:00'),
+(59, 86, 20, '2012-07-13 12:00:00'),(71, 86, 19, '2012-07-10 12:00:00'),(83, 86, 21, '2012-07-11 12:00:00'),
+(60, 87, 20, '2012-07-13 12:00:00'),(72, 87, 19, '2012-07-09 12:00:00'),(84, 87, 21, '2012-07-12 12:00:00'),
+(61, 88, 20, '2012-07-13 12:00:00'),(73, 88, 19, '2012-07-11 12:00:00'),(85, 88, 21, '2012-07-11 12:00:00'),
+(62, 89, 20, '2012-07-13 12:00:00'),(74, 89, 19, '2012-06-23 12:00:00'),(86, 89, 21, '2012-06-23 12:00:00'),
+(63, 60, 18, '2012-06-22 12:00:00'),(75, 60, 20, '2012-07-13 08:00:00'),(87, 60, 19, '2012-07-10 12:00:00'),
+(64, 79, 18, '2012-06-22 12:00:00'),(76, 79, 20, '2012-07-13 08:00:00'),(88, 79, 19, '2012-07-11 12:00:00'),
+(89, 60, 22, '2012-07-13 16:00:00'),(103, 81, 186, '2012-07-14 08:00:00'),(117, 85, 22, '2012-07-13 15:00:00'),
+(90, 60, 23, '2012-07-12 12:00:00'),(104, 81, 184, '2012-07-14 12:00:00'),(118, 85, 23, '2012-07-11 12:00:00'),
+(91, 60, 26, '2012-07-13 17:00:00'),(105, 81, 161, '2012-07-14 10:00:00'),(119, 85, 26, '2012-07-13 16:00:00'),
+(92, 60, 33, '2012-07-12 12:00:00'),(106, 81, 20, '2012-07-13 08:00:00'),(120, 85, 33, '2012-07-11 13:00:00'),
+(93, 60, 97, '2012-07-22 12:00:00'),(107, 82, 22, '2012-07-13 15:00:00'),(121, 85, 97, '2012-07-11 23:00:00'),
+(94, 60, 133, '2012-07-22 12:00:00'),(108, 82, 23, '2012-07-12 08:00:00'),(122, 86, 22, '2012-07-13 15:00:00'),
+(95, 60, 144, '2012-07-22 12:00:00'),(109, 82, 26, '2012-07-13 17:00:00'),(123, 86, 23, '2012-07-11 12:00:00'),
+(96, 79, 22, '2012-07-13 15:00:00'),(110, 82, 33, '2012-07-13 11:00:00'),(124, 86, 26, '2012-07-13 10:00:00'),
+(97, 79, 23, '2012-07-12 12:00:00'),(111, 82, 97, '2012-07-13 08:00:00'),(125, 86, 33, '2012-07-13 12:00:00'),
+(98, 79, 26, '2012-07-13 12:00:00'),(112, 83, 22, '2012-07-13 18:00:00'),(126, 87, 22, '2012-07-13 15:00:00'),
+(99, 79, 33, '2012-07-12 13:00:00'),(113, 83, 23, '2012-07-12 08:00:00'),(127, 87, 23, '2012-07-13 17:00:00'),
+(100, 79, 97, '2012-07-13 11:00:00'),(114, 83, 26, '2012-07-13 15:00:00'),(128, 87, 26, '2012-07-11 20:00:00'),
+(101, 80, 22, '2012-07-13 15:00:00'),(115, 83, 33, '2012-07-13 14:00:00'),(129, 87, 33, '2012-07-12 16:00:00'),
+(102, 80, 23, '2012-07-12 12:00:00'),(116, 83, 97, '2012-07-13 10:00:00'),(130, 87, 97, '2012-07-12 23:00:00'),
+(131, 80, 26, '2012-07-13 17:00:00'),(143, 83, 133, '2012-07-13 08:00:00'),(155, 88, 22, '2012-07-13 15:00:00'),
+(132, 80, 33, '2012-07-13 12:00:00'),(144, 84, 22, '2012-07-13 05:00:00'),(156, 88, 23, '2012-07-12 12:00:00'),
+(133, 80, 97, '2012-07-15 12:00:00'),(145, 84, 23, '2012-07-12 08:00:00'),(157, 88, 26, '2012-07-13 12:00:00'),
+(134, 80, 133, '2012-07-13 20:00:00'),(146, 84, 26, '2012-07-12 20:00:00'),(158, 88, 33, '2012-07-13 17:00:00'),
+(135, 81, 22, '2012-07-13 15:00:00'),(147, 84, 33, '2012-07-13 11:00:00'),(159, 89, 22, '2012-07-13 20:00:00'),
+(136, 81, 23, '2012-07-12 12:00:00'),(148, 84, 97, '2012-07-13 14:00:00'),(160, 89, 23, '2012-07-12 23:00:00'),
+(137, 81, 26, '2012-07-13 17:00:00'),(149, 84, 133, '2012-07-13 13:00:00'),(161, 89, 26, '2012-07-12 12:00:00'),
+(138, 81, 33, '2012-07-13 12:00:00'),(150, 84, 144, '2012-07-12 15:00:00'),(162, 89, 33, '2012-07-12 13:00:00'),
+(139, 81, 97, '2012-07-12 13:00:00'),(151, 84, 194, '2012-07-13 12:00:00'),(163, 89, 97, '2012-07-12 17:00:00'),
+(140, 81, 133, '2012-07-13 16:00:00'),(152, 84, 186, '2012-07-13 10:00:00'),(164, 89, 133, '2012-07-13 18:00:00'),
+(141, 81, 144, '2012-07-13 22:00:00'),(153, 84, 184, '2012-07-13 09:00:00'),(165, 89, 144, '2012-07-13 14:00:00'),
+(142, 81, 194, '2012-07-12 17:00:00'),(154, 84, 161, '2012-07-13 08:00:00'),(166, 89, 194, '2012-07-13 15:00:00');
+
+SET SQL_MODE=@OLD_SQL_MODE;
+
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
